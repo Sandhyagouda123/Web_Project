@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Figma Webpage </title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .image-section {
+            flex: 1;
+            background: url('https://via.placeholder.com/500x600') center/cover no-repeat;
+        }
+
+        .details-section {
+            flex: 1;
+            padding: 30px;
+        }
+
+        .brand {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .product-name {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 28px;
+            color: #1d4ed8;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+            margin-left: 10px;
+            font-size: 18px;
+        }
+
+        .discount {
+            color: #dc2626;
+            background-color: #fee2e2;
+            font-size: 14px;
+            padding: 4px 6px;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+
+        .color-options, .size-options {
+            margin: 20px 0;
+        }
+
+        .color-options .color {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            margin-right: 10px;
+            cursor: pointer;
+            border: 2px solid #ddd;
+        }
+
+        .color.beige { background-color: #d4c5a5; }
+        .color.green { background-color: #a4d7a6; }
+        .color.blue { background-color: #a6c5f7; }
+        .color.pink { background-color: #f7a6e0; }
+
+        .size-options button {
+            margin-right: 10px;
+            padding: 6px 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .size-options button.active {
+            border-color: #1d4ed8;
+            color: #1d4ed8;
+            font-weight: 600;
+        }
+
+        .quantity {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity button {
+            width: 35px;
+            height: 35px;
+            border: none;
+            background-color: #e5e7eb;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+
+        .quantity input {
+            width: 50px;
+            text-align: center;
+            border: none;
+            font-size: 18px;
+            margin: 0 10px;
+        }
+
+        .add-to-cart {
+            background-color: #1d4ed8;
+            color: #fff;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            width: 100%;
+            cursor: pointer;
+            margin: 20px 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background-color: #1e40af;
+        }
+
+        .description {
+            color: #555;
+            margin-top: 20px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="product-container">
+        <div class="product-image">
+            <img src="Product.jpg.png" alt="Embrace Sideboard">
+        </div>
+    <div class="container">
+        <div class="image-section"></div>
+        <div class="details-section">
+            <div class="brand">Marmeto</div>
+            <div class="product-name">Embrace Sideboard</div>
+            <div class="price">$12999.00 <span class="original-price">$19999.00</span><span class="discount">35% Off</span></div>
+            
+            <div class="color-options">
+                <div class="color beige"></div>
+                <div class="color green"></div>
+                <div class="color blue"></div>
+                <div class="color pink"></div>
+            </div>
+
+            <div class="size-options">
+                <button class="active">Small</button>
+                <button>Medium</button>
+                <button>Large</button>
+                <button>Extra Large</button>
+                <button>XXL</button>
+            </div>
+
+            <div class="quantity">
+                <button onclick="changeQuantity(-1)">-</button>
+                <input type="text" id="quantity" value="1" readonly>
+                <button onclick="changeQuantity(1)">+</button>
+            </div>
+
+            <button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add To Cart</button>
+
+            <div class="description">
+                The Embrace Sideboard is a stylish wear. With a top cloth designed to provide superior protection and look great, this storage solution is both functional and attractive. It fits seamlessly into any home decor, with clean lines and a timeless look. Crafted from premium materials for a combination of style, durability, and reliability.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function changeQuantity(amount) {
+            const quantityInput = document.getElementById('quantity');
+            let currentQuantity = parseInt(quantityInput.value);
+            const newQuantity = currentQuantity + amount;
+            if (newQuantity >= 1) {
+                quantityInput.value = newQuantity;
+            }
+        }
+    </script>
+</body>
+</html>
